@@ -5,6 +5,8 @@ class Solution(object):
         :type word2: List[str]
         :rtype: bool
         """
-        word = ""
+        sep = ''
+        test_word1 = sep.join(word1)
+        test_word2 = sep.join(word2)
 
-        for i in 
+        return test_word1 == test_word2
