@@ -4,15 +4,21 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        for i in s:
-            if s[i] == "(":
-                if s[i+1] != ")":
+        stack = []
+        brackets = {'(': ')', '{': "}", '[': ']'}
+
+        for bracket in s:
+            if bracket in brackets.keys():
+                stack.append(bracket)
+            else:
+                if len(stack) == 0:
                     return False
-            if s[i] == "{":
-                if s[i+1] != "}":
+                popped = stack.pop()
+                if bracket == ')' and popped != '(':
                     return False
-            if s[i] == "[":
-                if s[i+1] != "]":
+                elif bracket == '}' and popped != '{':
+                    return False
+                elif bracket == ']' and popped != '[':
                     return False
         
-        return True
+        return (len(stack) == 0)
