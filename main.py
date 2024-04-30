@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
-from models.users import Users, Session, engine
+from models.users import Users
+from models.base_model import Session
 
 app = Flask(__name__)
 
