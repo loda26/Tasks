@@ -1,17 +1,16 @@
 from flask import Flask, render_template, request, redirect
-from models.users import Users
-from models.base_model import Session
+from models.users import Users, Session
 
 app = Flask(__name__)
 
 Session = Session()
 
-@app.route('/')
+@app.route('/loda')
 def index():
     users = Session.query(Users).all()
     return render_template('index.html', users=users)
 
-@app.route('/submit', methods=['POST'])
+@app.route('/loda/submit', methods=['POST'])
 def submit():
     name = request.form['name']
     email = request.form['email']
@@ -21,9 +20,9 @@ def submit():
     Session.add(user)
     Session.commit()
 
-    return redirect('/')
+    return redirect('/loda')
 
-@app.route('/delete/<int:user_id>', methods=['DELETE'])
+@app.route('/loda/delete/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = Session.query(Users).filter_by(id=user_id).first()
     if user:
